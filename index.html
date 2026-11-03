@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Демо-Плёнка — оклейка авто плёнкой</title>
+<meta name="description" content="Учебный лендинг вымышленной мастерской по оклейке автомобилей «Демо-Плёнка».">
+<style>
+  :root {
+    --bg: #0f1115;
+    --bg-alt: #161a21;
+    --card: #1c212a;
+    --text: #e9ecf1;
+    --muted: #9aa3b2;
+    --accent: #ffcc33;
+    --accent-ink: #1a1400;
+    --tg: #2aabee;
+    --line: #2a303b;
+    --radius: 16px;
+    --wrap: 1120px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    -webkit-text-size-adjust: 100%;
+  }
+  a { color: inherit; }
+  h1, h2, h3 { line-height: 1.2; margin: 0 0 .5em; }
+  h2 { font-size: clamp(26px, 4vw, 38px); }
+  p { margin: 0 0 1em; }
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 16px; }
+  section { padding: 72px 0; }
+  section:nth-of-type(even) { background: var(--bg-alt); }
+  .lead { color: var(--muted); max-width: 640px; margin-bottom: 32px; }
+
+  /* Кнопки */
+  .btns { display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    min-height: 52px; padding: 0 24px;
+    border-radius: 12px; font-weight: 700; font-size: 16px;
+    text-decoration: none; transition: transform .15s, filter .15s;
+  }
+  .btn:hover { filter: brightness(1.08); transform: translateY(-1px); }
+  .btn:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+  .btn-tg { background: var(--tg); color: #fff; }
+  .btn-call { background: var(--accent); color: var(--accent-ink); }
+  .btn svg { width: 20px; height: 20px; flex: none; }
+
+  /* Шапка */
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(15,17,21,.9); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .header-in { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 16px; }
+  .logo { font-weight: 800; font-size: 20px; text-decoration: none; letter-spacing: .2px; }
+  .logo span { color: var(--accent); }
+  nav { display: flex; gap: 24px; }
+  nav a { color: var(--muted); text-decoration: none; font-size: 15px; }
+  nav a:hover { color: var(--text); }
+  .header-call { color: var(--accent); font-weight: 700; text-decoration: none; white-space: nowrap; }
+
+  /* Первый экран */
+  .hero {
+    padding: 96px 0 88px;
+    background:
+      radial-gradient(800px 400px at 85% 10%, rgba(255,204,51,.16), transparent 60%),
+      radial-gradient(600px 400px at 0% 100%, rgba(42,171,238,.12), transparent 60%),
+      var(--bg);
+  }
+  .tag {
+    display: inline-block; padding: 6px 12px; margin-bottom: 20px;
+    border: 1px solid var(--line); border-radius: 999px;
+    color: var(--muted); font-size: 14px;
+  }
+  .hero h1 { font-size: clamp(34px, 6vw, 60px); max-width: 820px; }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero p { font-size: clamp(17px, 2vw, 20px); color: var(--muted); max-width: 640px; margin-bottom: 32px; }
+  .hero-facts { display: flex; flex-wrap: wrap; gap: 12px 32px; margin-top: 40px; padding: 0; list-style: none; color: var(--muted); }
+  .hero-facts b { color: var(--text); }
+
+  /* Сетки карточек */
+  .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+  .card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 24px;
+    display: flex; flex-direction: column;
+  }
+  .card h3 { font-size: 19px; }
+  .card p { color: var(--muted); font-size: 15px; flex: 1; }
+  .price { font-size: 22px; font-weight: 800; color: var(--accent); margin-top: 8px; }
+  .price small { font-size: 14px; font-weight: 500; color: var(--muted); }
+  .note { color: var(--muted); font-size: 14px; margin-top: 20px; }
+
+  /* Этапы */
+  .steps { counter-reset: step; list-style: none; padding: 0; margin: 0; display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+  .steps li {
+    counter-increment: step; position: relative;
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 64px 20px 20px;
+  }
+  .steps li::before {
+    content: counter(step);
+    position: absolute; top: 20px; left: 20px;
+    width: 32px; height: 32px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: var(--accent); color: var(--accent-ink); font-weight: 800;
+  }
+  .steps h3 { font-size: 17px; }
+  .steps p { color: var(--muted); font-size: 15px; margin: 0; }
+
+  /* Гарантия */
+  .warranty { display: grid; gap: 32px; grid-template-columns: 1fr 1fr; align-items: start; }
+  .badge {
+    background: linear-gradient(135deg, var(--accent), #ff9f1a);
+    color: var(--accent-ink); border-radius: var(--radius); padding: 32px;
+  }
+  .badge .big { font-size: clamp(48px, 8vw, 72px); font-weight: 900; line-height: 1; }
+  .badge p { margin: 12px 0 0; font-weight: 600; }
+  .checks { list-style: none; padding: 0; margin: 0; }
+  .checks li { padding: 12px 0 12px 32px; border-bottom: 1px solid var(--line); position: relative; }
+  .checks li:last-child { border-bottom: 0; }
+  .checks li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: 800; }
+  .checks .muted { color: var(--muted); font-size: 15px; }
+
+  /* FAQ */
+  .faq { max-width: 820px; }
+  details {
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    margin-bottom: 12px; padding: 0 20px;
+  }
+  summary {
+    cursor: pointer; list-style: none; padding: 18px 32px 18px 0; position: relative;
+    font-weight: 600;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after {
+    content: "+"; position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+    font-size: 24px; color: var(--accent); transition: transform .2s;
+  }
+  details[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+  details p { color: var(--muted); padding-bottom: 18px; margin: 0; }
+
+  /* Контакты */
+  .cta { text-align: center; }
+  .cta .lead { margin-left: auto; margin-right: auto; }
+  .cta .btns { justify-content: center; }
+  .contacts { color: var(--muted); margin-top: 24px; font-size: 15px; }
+
+  footer { border-top: 1px solid var(--line); padding: 32px 0 40px; color: var(--muted); font-size: 14px; }
+  footer p { margin: 0 0 8px; }
+  .disclaimer { color: var(--text); background: var(--card); border: 1px dashed var(--line); border-radius: 12px; padding: 12px 16px; margin-bottom: 16px; }
+
+  /* Плавающие кнопки на телефоне */
+  .mobile-bar { display: none; }
+
+  @media (max-width: 860px) {
+    nav { display: none; }
+    .warranty { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    section { padding: 56px 0; }
+    .hero { padding: 56px 0 48px; }
+    .header-call { display: none; }
+    .btns .btn { flex: 1 1 100%; }
+    .mobile-bar {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
+      padding: 8px 16px calc(8px + env(safe-area-inset-bottom));
+      background: rgba(15,17,21,.95); border-top: 1px solid var(--line);
+    }
+    .mobile-bar .btn { min-height: 48px; padding: 0 12px; font-size: 15px; }
+    body { padding-bottom: 72px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Контакты вымышленные: замените ссылку Telegram и номер телефона на свои -->
+<header>
+  <div class="wrap header-in">
+    <a class="logo" href="#top">Демо-<span>Плёнка</span></a>
+    <nav aria-label="Разделы">
+      <a href="#services">Услуги</a>
+      <a href="#steps">Этапы</a>
+      <a href="#warranty">Гарантия</a>
+      <a href="#faq">Вопросы</a>
+    </nav>
+    <a class="header-call" href="tel:+70000000000">+7 000 000-00-00</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <span class="tag">Мастерская по оклейке автомобилей</span>
+      <h1>Защитим кузов плёнкой <em>без снятия деталей</em> и лишних слов</h1>
+      <p>Полиуретан от сколов, смена цвета винилом, тонировка и антихром. Покажем образцы плёнок, честно посчитаем стоимость и отдадим машину в оговорённый срок.</p>
+      <div class="btns">
+        <a class="btn btn-tg" href="https://t.me/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.8 15.3 9.4 20c.6 0 .9-.3 1.2-.6l2.9-2.8 6 4.4c1.1.6 1.9.3 2.2-1L24 3.6c.4-1.6-.6-2.2-1.6-1.8L1.2 9.9c-1.5.6-1.4 1.4-.3 1.8l5.4 1.7L18.8 5.5c.6-.4 1.1-.2.7.2z"/></svg>
+          Написать в Telegram
+        </a>
+        <a class="btn btn-call" href="tel:+70000000000">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg>
+          Позвонить
+        </a>
+      </div>
+      <ul class="hero-facts">
+        <li><b>от 1 дня</b> — срок работ</li>
+        <li><b>до 3 лет</b> — гарантия на монтаж</li>
+        <li><b>Смета</b> — до начала работ</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <h2>Услуги и цены</h2>
+      <p class="lead">Указаны стартовые цены для легкового автомобиля среднего класса. Точная стоимость зависит от размера машины, состояния кузова и выбранной плёнки.</p>
+      <div class="grid">
+        <article class="card">
+          <h3>Антигравийная плёнка — зоны риска</h3>
+          <p>Капот, передний бампер, фары, зеркала и передние крылья. Защищает от сколов и песка.</p>
+          <div class="price"><small>от</small> 25 000 ₽</div>
+        </article>
+        <article class="card">
+          <h3>Полная оклейка полиуретаном</h3>
+          <p>Весь кузов в глянцевую или матовую прозрачную плёнку. Сохраняет заводское ЛКП.</p>
+          <div class="price"><small>от</small> 140 000 ₽</div>
+        </article>
+        <article class="card">
+          <h3>Смена цвета винилом</h3>
+          <p>Полная или частичная оклейка цветной плёнкой: глянец, мат, сатин, металлик.</p>
+          <div class="price"><small>от</small> 90 000 ₽</div>
+        </article>
+        <article class="card">
+          <h3>Антихром</h3>
+          <p>Оклейка хромированных молдингов, решётки и эмблем чёрной или цветной плёнкой.</p>
+          <div class="price"><small>от</small> 6 000 ₽</div>
+        </article>
+        <article class="card">
+          <h3>Тонировка стёкол</h3>
+          <p>Задняя полусфера и боковые стёкла. Подберём плёнку с учётом требований к светопропусканию.</p>
+          <div class="price"><small>от</small> 5 000 ₽</div>
+        </article>
+        <article class="card">
+          <h3>Бронирование салона</h3>
+          <p>Глянцевые панели, мультимедиа, пороги и зоны, которые быстро царапаются.</p>
+          <div class="price"><small>от</small> 4 000 ₽</div>
+        </article>
+      </div>
+      <p class="note">Цены условные — сайт учебный.</p>
+    </div>
+  </section>
+
+  <section id="steps">
+    <div class="wrap">
+      <h2>Как проходит работа</h2>
+      <p class="lead">Пять шагов от первого сообщения до выдачи автомобиля.</p>
+      <ol class="steps">
+        <li>
+          <h3>Связь и предварительный расчёт</h3>
+          <p>Пишете в Telegram или звоните — называем ориентировочную цену и свободные даты.</p>
+        </li>
+        <li>
+          <h3>Осмотр и смета</h3>
+          <p>Смотрим кузов, показываем образцы плёнок, фиксируем стоимость и срок.</p>
+        </li>
+        <li>
+          <h3>Подготовка</h3>
+          <p>Мойка, обезжиривание, удаление битума и мелкой грязи из стыков.</p>
+        </li>
+        <li>
+          <h3>Оклейка</h3>
+          <p>Монтаж в чистом тёплом боксе, кромки заворачиваем там, где это возможно.</p>
+        </li>
+        <li>
+          <h3>Выдача</h3>
+          <p>Проверяем результат вместе с вами, рассказываем про уход и выдаём гарантийный талон.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="warranty">
+    <div class="wrap warranty">
+      <div>
+        <h2>Гарантия</h2>
+        <p class="lead">Отвечаем за свою работу и прописываем условия в гарантийном талоне.</p>
+        <div class="badge">
+          <div class="big">до 3 лет</div>
+          <p>на монтаж — срок зависит от вида плёнки и услуги</p>
+        </div>
+      </div>
+      <ul class="checks">
+        <li><b>Отслоения и пузыри по нашей вине</b><br><span class="muted">Переклеим элемент бесплатно.</span></li>
+        <li><b>Гарантия производителя на плёнку</b><br><span class="muted">Действует отдельно, срок указан в документах на материал.</span></li>
+        <li><b>Бесплатный осмотр</b><br><span class="muted">Через месяц после оклейки проверим кромки и стыки.</span></li>
+        <li><b>Что не входит</b><br><span class="muted">Механические повреждения, ДТП и мойка с нарушением рекомендаций по уходу.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap faq">
+      <h2>Вопросы и ответы</h2>
+      <details>
+        <summary>Сколько времени занимает оклейка?</summary>
+        <p>Зоны риска — 1–2 дня, полная оклейка полиуретаном или смена цвета — 4–7 дней. Точный срок называем после осмотра.</p>
+      </details>
+      <details>
+        <summary>Нужно ли снимать детали?</summary>
+        <p>В большинстве случаев нет. Иногда снимаем эмблемы или фонари, чтобы аккуратно завернуть кромку — обсуждаем это заранее.</p>
+      </details>
+      <details>
+        <summary>Повредит ли плёнка заводскую краску при снятии?</summary>
+        <p>Качественная плёнка на родном лакокрасочном покрытии снимается без следов. На перекрашенных деталях есть риск, о нём предупредим при осмотре.</p>
+      </details>
+      <details>
+        <summary>Как ухаживать за машиной после оклейки?</summary>
+        <p>Первую неделю не мыть. Дальше — бесконтактная или ручная мойка, без направленной струи высокого давления на кромки.</p>
+      </details>
+      <details>
+        <summary>Можно ли оклеить только часть кузова?</summary>
+        <p>Да: капот, крышу, зеркала или любые отдельные элементы. Цену считаем поэлементно.</p>
+      </details>
+      <details>
+        <summary>Нужно ли согласовывать смену цвета?</summary>
+        <p>Правила зависят от законодательства и того, меняется ли основной цвет автомобиля. Перед работой рекомендуем уточнить требования в ГИБДД.</p>
+      </details>
+    </div>
+  </section>
+
+  <section id="contacts" class="cta">
+    <div class="wrap">
+      <h2>Посчитаем стоимость за пару минут</h2>
+      <p class="lead">Напишите марку и модель автомобиля и что хотите защитить или переклеить — ответим с ориентировочной ценой.</p>
+      <div class="btns">
+        <a class="btn btn-tg" href="https://t.me/" target="_blank" rel="noopener">Написать в Telegram</a>
+        <a class="btn btn-call" href="tel:+70000000000">Позвонить</a>
+      </div>
+      <p class="contacts">Ежедневно с 10:00 до 20:00 · +7 000 000-00-00</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="disclaimer">Это учебный сайт. Бренд «Демо-Плёнка» вымышленный, мастерской не существует. Цены, телефон и контакты условные.</p>
+    <p>© 2026 «Демо-Плёнка» — демонстрационный проект</p>
+  </div>
+</footer>
+
+<div class="mobile-bar">
+  <a class="btn btn-tg" href="https://t.me/" target="_blank" rel="noopener">Telegram</a>
+  <a class="btn btn-call" href="tel:+70000000000">Позвонить</a>
+</div>
+
+</body>
+</html>
