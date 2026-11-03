@@ -8,8 +8,12 @@
 <!-- Демо-сайт: не индексировать в поисковиках. Уберите эту строку при запуске -->
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#f6f4ef">
+<!-- Заголовки безопасности. При подключении отправки заявок добавьте адрес сервера в connect-src -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action 'self'; base-uri 'self'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="og-image.png">
+<link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <!-- Превью ссылки в мессенджерах. Если адрес сайта другой, замените URL ниже -->
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
@@ -21,9 +25,9 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Unbounded:wght@500;600&display=swap" rel="stylesheet">
+<link rel="preload" href="fonts/manrope-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/unbounded-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts/fonts.css">
 <style>
   :root {
     --bg: #f6f4ef;        /* тёплый светлый фон */
@@ -169,6 +173,13 @@
 
   /* Форма */
   .contact-alt { margin-top: 8px; color: var(--muted); font-size: 16px; }
+  .direct { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--line); }
+  .direct p { color: var(--muted); font-size: 15px; margin-bottom: 10px; }
+  .direct dl { margin: 0; }
+  .direct dl div { display: flex; gap: 16px; padding: 6px 0; }
+  .direct dt { width: 88px; color: var(--muted); font-size: 15px; }
+  .direct dd { margin: 0; font-weight: 700; }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
   form { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 36px; }
   .field { margin-bottom: 18px; }
   .field label { display: block; font-weight: 600; font-size: 15px; margin-bottom: 6px; }
@@ -459,6 +470,15 @@
         <h2>Запишитесь на бесплатный разбор</h2>
         <p class="lead">Свяжемся в течение рабочего дня, зададим пару вопросов о бизнесе и договоримся о времени созвона.</p>
         <p class="contact-alt">Ответим в Telegram или позвоним, как вам удобнее.</p>
+        <!-- Прямой контакт. Перед запуском замените заглушки и сделайте их ссылками:
+             <a href="https://t.me/ваш_ник">@ваш_ник</a>, <a href="mailto:почта@домен">почта@домен</a> -->
+        <div class="direct">
+          <p>Если удобнее написать самим:</p>
+          <dl>
+            <div><dt>Telegram</dt><dd>[@ник]</dd></div>
+            <div><dt>Почта</dt><dd>[почта@домен]</dd></div>
+          </dl>
+        </div>
       </div>
 
       <form id="lead-form" novalidate>
@@ -496,9 +516,14 @@
             <label for="f-msg">Что хотите улучшить <span class="opt">(необязательно)</span></label>
             <textarea id="f-msg" name="message" placeholder="Например: мало заявок с рекламы"></textarea>
           </div>
+          <!-- Ловушка для ботов: люди это поле не видят и не заполняют -->
+          <div class="hp" aria-hidden="true">
+            <label for="f-company">Компания</label>
+            <input id="f-company" name="company" type="text" tabindex="-1" autocomplete="off">
+          </div>
           <label class="consent" data-field="consent">
             <input type="checkbox" name="consent" required>
-            <span>Согласен(на) на обработку персональных данных в соответствии с <a href="privacy.html" target="_blank">политикой конфиденциальности</a></span>
+            <span>Даю <a href="soglasie.html" target="_blank">согласие на обработку персональных данных</a>. Как мы их храним и защищаем, описано в <a href="privacy.html" target="_blank">политике конфиденциальности</a></span>
           </label>
           <button class="btn" type="submit">Записаться на разбор</button>
           <p class="demo-note">Демо-режим: заявка никуда не отправляется.</p>
@@ -528,6 +553,7 @@
       </div>
       <div>
         <p><a href="privacy.html">Политика конфиденциальности</a></p>
+        <p><a href="soglasie.html">Согласие на обработку данных</a></p>
         <p><a href="terms.html">Пользовательское соглашение</a></p>
         <p>© 2026 Canopy</p>
       </div>
@@ -539,69 +565,6 @@
   <a class="btn" href="#lead">Записаться на бесплатный разбор</a>
 </div>
 
-<script>
-  // Плавающая кнопка на телефоне: видна после первого экрана и прячется у формы
-  (function () {
-    var cta = document.getElementById('mobile-cta');
-    var hero = document.querySelector('.hero');
-    var lead = document.getElementById('lead');
-    function onScroll() {
-      var pastHero = window.scrollY > hero.offsetTop + hero.offsetHeight - 80;
-      var atForm = lead.getBoundingClientRect().top < window.innerHeight * 0.6;
-      cta.classList.toggle('show', pastHero && !atForm);
-    }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-  })();
-
-  // Форма заявки
-  (function () {
-    var form = document.getElementById('lead-form');
-
-    // Сейчас демо: ничего не отправляем. Позже здесь будет отправка в Telegram.
-    function sendLead(data) {
-      return new Promise(function (resolve) { setTimeout(resolve, 600); });
-    }
-
-    function check(name, ok) {
-      form.querySelector('[data-field="' + name + '"]').classList.toggle('invalid', !ok);
-      return ok;
-    }
-    function validate() {
-      var f = form.elements;
-      var contact = f.contact.value.trim();
-      var isTg = /^@?[A-Za-z0-9_]{5,32}$/.test(contact) && /[A-Za-z]/.test(contact);
-      var isPhone = contact.replace(/\D/g, '').length >= 10;
-      return [
-        check('name', f.name.value.trim().length >= 2),
-        check('contact', isTg || isPhone),
-        check('business', f.business.value !== ''),
-        check('consent', f.consent.checked)
-      ].every(Boolean);
-    }
-
-    function recheck(e) {
-      var wrap = e.target.closest('[data-field]');
-      if (wrap && wrap.classList.contains('invalid')) validate();
-    }
-    form.addEventListener('input', recheck);
-    form.addEventListener('change', recheck);
-
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      if (!validate()) {
-        var first = form.querySelector('.invalid input, .invalid select');
-        if (first) first.focus();
-        return;
-      }
-      var btn = form.querySelector('button[type=submit]');
-      btn.disabled = true;
-      btn.textContent = 'Отправляем…';
-      sendLead(Object.fromEntries(new FormData(form))).then(function () {
-        form.classList.add('sent');
-      });
-    });
-  })();
-</script>
+<script src="app.js"></script>
 </body>
 </html>
