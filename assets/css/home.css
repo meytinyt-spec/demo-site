@@ -1,0 +1,286 @@
+/* ==========================================================================
+   Canopy — главная страница
+   Разделы идут в том же порядке, что и на странице.
+   Правила для телефона лежат рядом с разделом, к которому относятся.
+   ========================================================================== */
+
+/* --- Общее для разделов --------------------------------------------------- */
+
+.section { padding: 104px 0; }
+.section-alt { background: var(--bg-2); }
+
+/* Раскладка «заголовок слева, содержимое справа» */
+.split { display: grid; grid-template-columns: 1fr 1.6fr; gap: 64px; align-items: start; }
+.split > :first-child h2 { margin-bottom: 16px; }
+
+@media (max-width: 900px) {
+  .split { grid-template-columns: 1fr; gap: 32px; }
+}
+@media (max-width: 600px) {
+  .section { padding: 72px 0; }
+}
+
+/* --- 1. Первый экран ------------------------------------------------------ */
+
+.hero { padding: 88px 0 0; }
+.hero h1 { font-size: clamp(32px, 5.2vw, 60px); max-width: 980px; margin-bottom: 28px; }
+.hero p { font-size: clamp(18px, 2vw, 20px); color: var(--muted); max-width: 640px; margin-bottom: 36px; }
+.hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; }
+
+/* Три коротких факта под кнопкой */
+.facts {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  margin: 72px 0 0;
+  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+}
+.facts div { padding: 22px 24px 22px 0; }
+.facts div + div { padding-left: 24px; border-left: 1px solid var(--line); }
+.facts dt { font-size: 14px; color: var(--muted); }
+.facts dd { margin: 2px 0 0; font-weight: 700; font-size: 18px; }
+
+@media (max-width: 600px) {
+  .hero { padding: 48px 0 0; }
+  .hero-actions .btn { width: 100%; }
+  .hero-actions .link { margin: 0 auto; }
+  .facts { grid-template-columns: 1fr; margin-top: 48px; }
+  .facts div, .facts div + div { padding: 14px 0; border-left: 0; }
+  .facts div + div { border-top: 1px solid var(--line); }
+}
+
+/* --- 2. Образец отчёта ---------------------------------------------------- */
+
+.section-report { padding-top: 88px; }
+.report-intro {
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end;
+  gap: 16px 48px; margin-bottom: 28px;
+}
+.report-intro .lead { margin: 0; }
+
+.report { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); }
+.report-head {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px;
+  padding: 20px 28px; border-bottom: 1px solid var(--line);
+}
+.report-head b { font-size: 17px; }
+.report-head span { color: var(--muted); font-size: 15px; }
+
+.report-table { overflow-x: auto; }
+.report-table table { width: 100%; border-collapse: collapse; font-size: 16px; min-width: 620px; }
+.report-table th,
+.report-table td { text-align: right; padding: 14px 28px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.report-table th:first-child,
+.report-table td:first-child { text-align: left; }
+.report-table th { font-size: 13px; font-weight: 600; color: var(--muted); }
+.report-table tfoot td { font-weight: 700; border-bottom: 0; }
+.report-table .total { color: var(--ochre); }
+
+.report-notes { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); }
+.report-notes div { padding: 22px 28px; }
+.report-notes div + div { border-left: 1px solid var(--line); }
+.report-notes h3 { font-size: 15px; margin-bottom: 6px; }
+.report-notes p { color: var(--muted); font-size: 15px; margin: 0; }
+
+.report-caption { color: var(--muted); font-size: 14px; margin: 14px 0 0; }
+
+@media (max-width: 600px) {
+  .section-report { padding-top: 64px; }
+  .report-head { padding-left: 16px; padding-right: 16px; }
+
+  /* Таблица на телефоне: каждый канал отдельным блоком, подписи берутся из data-label */
+  .report-table table { min-width: 0; }
+  .report-table thead { display: none; }
+  .report-table tr {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6px 16px;
+    padding: 16px; border-bottom: 1px solid var(--line);
+  }
+  .report-table tfoot tr { border-bottom: 0; }
+  .report-table td {
+    display: flex; justify-content: space-between; gap: 8px;
+    padding: 0; border: 0; text-align: right; font-size: 15px;
+  }
+  .report-table td::before { content: attr(data-label); color: var(--muted); font-weight: 500; text-align: left; }
+  .report-table td:first-child { grid-column: 1 / -1; font-weight: 700; font-size: 16px; margin-bottom: 4px; }
+  .report-table td:first-child::before { content: none; }
+
+  .report-notes { grid-template-columns: 1fr; }
+  .report-notes div { padding: 18px 16px; }
+  .report-notes div + div { border-left: 0; border-top: 1px solid var(--line); }
+}
+
+/* --- 3. С чем приходят ---------------------------------------------------- */
+
+.prose p { font-size: 19px; max-width: 680px; }
+.prose .muted { color: var(--muted); }
+
+/* --- 4. Услуги ------------------------------------------------------------ */
+
+.service-list { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--ink); }
+.service-list li {
+  display: grid; grid-template-columns: 56px 1fr 1.4fr; gap: 24px;
+  padding: 28px 0; border-bottom: 1px solid var(--line);
+}
+.service-num { color: var(--ochre); font-weight: 700; font-size: 15px; padding-top: 2px; }
+.service-list h3 { margin: 0; }
+.service-list p { color: var(--muted); margin: 0; font-size: 16px; }
+.service-list small { display: block; margin-top: 8px; font-size: 14px; }
+
+@media (max-width: 900px) {
+  .service-list li { grid-template-columns: 40px 1fr; }
+  .service-list li > div { grid-column: 2; }
+}
+@media (max-width: 600px) {
+  .service-list li { grid-template-columns: 32px 1fr; gap: 4px 12px; }
+}
+
+/* --- 5. Этапы ------------------------------------------------------------- */
+
+.steps {
+  list-style: none; padding: 0; margin: 48px 0 0;
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  counter-reset: step; border-top: 1px solid var(--ink);
+}
+.steps li { counter-increment: step; padding: 24px 20px 0 0; }
+.steps li + li { padding-left: 20px; border-left: 1px solid var(--line); }
+.steps li::before {
+  content: counter(step); display: block; margin-bottom: 20px;
+  font: 500 28px/1 var(--font-head); color: var(--ochre);
+}
+.steps h3 { font-size: 17px; margin-bottom: 8px; }
+.steps p { color: var(--muted); font-size: 15px; margin: 0; }
+.steps .when { display: block; margin-top: 14px; font-size: 14px; font-weight: 700; }
+
+@media (max-width: 1000px) {
+  .steps { grid-template-columns: 1fr 1fr; row-gap: 32px; }
+  .steps li, .steps li + li { padding: 24px 20px 0 0; border-left: 0; }
+}
+@media (max-width: 600px) {
+  .steps { grid-template-columns: 1fr; }
+}
+
+/* --- 6. Принципы ---------------------------------------------------------- */
+
+.principle-list { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--ink); }
+.principle-list li { padding: 24px 0; border-bottom: 1px solid var(--line); }
+.principle-list b { display: block; font-size: 18px; margin-bottom: 4px; }
+.principle-list span { color: var(--muted); font-size: 16px; }
+
+/* --- 7. Бесплатный разбор (тёмный блок) ----------------------------------- */
+
+.section-audit { padding-top: 0; }
+.audit {
+  display: grid; grid-template-columns: 1fr 1.1fr; gap: 64px;
+  padding: 64px; border-radius: var(--radius);
+  background: var(--ink); color: var(--bg);
+}
+.audit h2 { color: #fff; }
+.audit p { color: var(--on-dark-muted); font-size: 18px; }
+.audit ol { list-style: none; padding: 0; margin: 0; counter-reset: audit; border-top: 1px solid var(--on-dark-line); }
+.audit li {
+  counter-increment: audit; display: grid; grid-template-columns: 40px 1fr;
+  padding: 18px 0; border-bottom: 1px solid var(--on-dark-line);
+}
+.audit li::before { content: counter(audit); color: var(--ochre-light); font-weight: 700; }
+.audit .btn { background: var(--bg); color: var(--ink); margin-top: 12px; }
+.audit .btn:hover { background: #fff; }
+.audit .audit-meta { margin-top: 18px; }
+
+@media (max-width: 900px) {
+  .audit { grid-template-columns: 1fr; gap: 32px; padding: 40px 28px; }
+}
+@media (max-width: 600px) {
+  .audit { padding: 32px 20px; }
+}
+
+/* --- 8. Вопросы ----------------------------------------------------------- */
+
+.faq-list { border-top: 1px solid var(--ink); }
+.faq-list details { border-bottom: 1px solid var(--line); }
+.faq-list summary {
+  position: relative; cursor: pointer; list-style: none;
+  padding: 22px 40px 22px 0; font-weight: 700; font-size: 18px;
+}
+.faq-list summary::-webkit-details-marker { display: none; }
+.faq-list summary::after {
+  content: "+"; position: absolute; right: 4px; top: 50%; transform: translateY(-50%);
+  font-size: 26px; font-weight: 400; color: var(--muted);
+}
+.faq-list details[open] summary::after { content: "−"; }
+.faq-list details p { color: var(--muted); margin: 0; padding-bottom: 22px; max-width: 680px; }
+
+/* --- 9. Заявка ------------------------------------------------------------ */
+
+.contact-alt { margin-top: 8px; color: var(--muted); font-size: 16px; }
+
+/* Прямые контакты */
+.direct { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--line); }
+.direct p { color: var(--muted); font-size: 15px; margin-bottom: 10px; }
+.direct dl { margin: 0; }
+.direct dl div { display: flex; gap: 16px; padding: 6px 0; }
+.direct dt { width: 88px; color: var(--muted); font-size: 15px; }
+.direct dd { margin: 0; font-weight: 700; }
+
+/* Форма */
+.lead-form { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 36px; }
+.field { margin-bottom: 18px; }
+.field label { display: block; font-weight: 600; font-size: 15px; margin-bottom: 6px; }
+.field .opt { color: var(--muted); font-weight: 500; }
+.field input, .field select, .field textarea {
+  width: 100%; min-height: 50px; padding: 12px 14px;
+  border: 1px solid var(--line-strong); border-radius: var(--radius);
+  background: #fff; color: var(--ink);
+  font: 500 16px/1.4 var(--font-text);
+  transition: border-color .15s;
+}
+.field textarea { min-height: 96px; resize: vertical; }
+.field select {
+  appearance: none; padding-right: 40px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235a6560' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 14px center;
+}
+.field input:hover, .field select:hover, .field textarea:hover { border-color: #a9a293; }
+
+/* Ошибки заполнения */
+.err { display: none; color: var(--error); font-size: 14px; margin-top: 6px; }
+.invalid .err { display: block; }
+.invalid input, .invalid select { border-color: var(--error); }
+
+/* Согласие */
+.consent { display: flex; gap: 12px; align-items: flex-start; margin: 6px 0 22px; font-size: 14px; color: var(--muted); }
+.consent input { width: 18px; height: 18px; margin: 2px 0 0; flex: none; accent-color: var(--green); }
+.consent.invalid { color: var(--error); }
+
+/* Ловушка для ботов: поле есть в форме, но человеку его не видно */
+.trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+.lead-form .btn { width: 100%; }
+.form-error { display: none; margin: 14px 0 0; color: var(--error); font-size: 14px; }
+.form-error.show { display: block; }
+.demo-note { margin: 14px 0 0; font-size: 13px; color: var(--muted); text-align: center; }
+
+/* После отправки форма сменяется благодарностью */
+.success { display: none; padding: 8px 0; }
+.success h3 { font: 500 24px/1.2 var(--font-head); margin-bottom: 12px; }
+.success p { color: var(--muted); }
+.success .demo-note { text-align: left; }
+.lead-form.sent .fields { display: none; }
+.lead-form.sent .success { display: block; }
+
+@media (max-width: 600px) {
+  .lead-form { padding: 24px 18px; }
+}
+
+/* --- Плавающая кнопка на телефоне ----------------------------------------- */
+
+.mobile-cta { display: none; }
+
+@media (max-width: 600px) {
+  body { padding-bottom: 72px; }
+  .mobile-cta {
+    display: block; visibility: hidden;
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+    background: var(--bg); border-top: 1px solid var(--line);
+  }
+  .mobile-cta.show { visibility: visible; }
+  .mobile-cta .btn { width: 100%; min-height: 50px; }
+}

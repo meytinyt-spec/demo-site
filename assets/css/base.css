@@ -1,0 +1,141 @@
+/* ==========================================================================
+   Canopy — общие стили всех страниц
+   Цвета, шрифты, сетка, кнопки, шапка и подвал.
+   Чтобы поменять фирменный цвет или шрифт, правьте только переменные ниже.
+   ========================================================================== */
+
+:root {
+  /* Цвета */
+  --bg: #f6f4ef;            /* тёплый светлый фон */
+  --bg-2: #eeeae1;          /* фон чередующихся секций */
+  --paper: #fbfaf7;         /* таблицы, форма, плашки */
+  --ink: #14211b;           /* основной текст и тёмный блок */
+  --muted: #5a6560;         /* второстепенный текст */
+  --line: #dcd7cc;          /* тонкие линии */
+  --line-strong: #c9c3b6;   /* рамки полей и пунктир */
+  --green: #1f6b46;         /* фирменный: кнопки и ссылки */
+  --green-dark: #17553a;    /* кнопки при наведении */
+  --ochre: #8f6418;         /* номера и цифры на светлом фоне */
+  --ochre-light: #d4a64a;   /* номера на тёмном фоне */
+  --error: #b3261e;
+  --on-dark-muted: #a9b3ad; /* второстепенный текст на тёмном */
+  --on-dark-line: #2c3a33;  /* линии на тёмном */
+
+  /* Шрифты */
+  --font-text: Manrope, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-head: Unbounded, Manrope, system-ui, sans-serif;
+
+  /* Размеры */
+  --radius: 4px;
+  --wrap: 1160px;
+  --header-h: 68px;
+}
+
+/* --- Основа --------------------------------------------------------------- */
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 12px); }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 17px/1.6 var(--font-text);
+  -webkit-text-size-adjust: 100%;
+}
+
+a { color: inherit; }
+img, svg { display: block; }
+
+h1, h2, h3 { margin: 0 0 .5em; }
+h1, h2 { font-family: var(--font-head); font-weight: 500; line-height: 1.15; letter-spacing: -.02em; }
+h2 { font-size: clamp(26px, 3.6vw, 40px); }
+h3 { font-size: 19px; font-weight: 700; line-height: 1.3; }
+p { margin: 0 0 1em; }
+
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 16px; }
+.lead { color: var(--muted); font-size: 19px; max-width: 640px; }
+.num { font-variant-numeric: tabular-nums; }
+
+/* Видно только программам чтения с экрана */
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+/* --- Кнопки и ссылки ------------------------------------------------------ */
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 54px; padding: 0 28px;
+  border: 0; border-radius: var(--radius);
+  background: var(--green); color: #fff;
+  font: 700 16px/1 var(--font-text);
+  text-decoration: none; cursor: pointer;
+  transition: background .15s;
+}
+.btn:hover { background: var(--green-dark); }
+.btn:disabled { cursor: default; opacity: .7; }
+.btn-sm { min-height: 42px; padding: 0 18px; font-size: 15px; }
+
+.link {
+  color: var(--green); font-weight: 600;
+  text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px;
+}
+.link:hover { color: var(--green-dark); text-decoration-thickness: 2px; }
+
+a:focus-visible, button:focus-visible, input:focus-visible,
+select:focus-visible, textarea:focus-visible, summary:focus-visible {
+  outline: 2px solid var(--green); outline-offset: 3px;
+}
+
+/* --- Шапка ---------------------------------------------------------------- */
+
+.site-header {
+  position: sticky; top: 0; z-index: 10;
+  background: var(--bg); border-bottom: 1px solid var(--line);
+}
+.site-header .wrap {
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  height: var(--header-h);
+}
+.brand {
+  display: flex; align-items: center; gap: 10px;
+  font: 600 20px/1 var(--font-head); letter-spacing: -.01em; text-decoration: none;
+}
+.brand img { width: 30px; height: 30px; flex: none; }
+.site-nav { display: flex; gap: 28px; }
+.site-nav a { color: var(--muted); text-decoration: none; font-size: 15px; font-weight: 500; }
+.site-nav a:hover { color: var(--ink); }
+
+/* --- Подвал --------------------------------------------------------------- */
+
+.site-footer { border-top: 1px solid var(--line); padding: 40px 0 48px; color: var(--muted); font-size: 14px; }
+.site-footer .columns { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 24px 48px; }
+.site-footer .brand { font-size: 17px; color: var(--ink); margin-bottom: 10px; }
+.site-footer .brand img { width: 26px; height: 26px; }
+.site-footer p { margin: 0 0 6px; }
+.site-footer a { color: var(--muted); }
+.site-footer a:hover { color: var(--ink); }
+
+.site-footer .disclaimer {
+  border: 1px dashed var(--line-strong); border-radius: var(--radius);
+  padding: 12px 16px; margin-bottom: 32px; color: var(--ink);
+}
+
+/* --- Телефоны и планшеты -------------------------------------------------- */
+
+@media (max-width: 900px) {
+  .site-nav { display: none; }
+  .site-footer .columns { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  :root { --header-h: 60px; }
+  .site-header .btn { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
