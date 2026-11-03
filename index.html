@@ -3,380 +3,593 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Демо-Плёнка — оклейка авто плёнкой</title>
-<meta name="description" content="Учебный лендинг вымышленной мастерской по оклейке автомобилей «Демо-Плёнка».">
-<!-- Демо-сайт: не индексировать в поисковиках -->
+<title>Canopy — маркетинг для роста прибыли малого бизнеса</title>
+<meta name="description" content="Canopy — маркетинговое агентство полного цикла для малого бизнеса: стратегия, сайт, реклама, соцсети и повторные продажи. Бесплатный разбор маркетинга за 30 минут.">
+<!-- Демо-сайт: не индексировать в поисковиках. Уберите эту строку при запуске -->
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#0f1115">
+<meta name="theme-color" content="#ffffff">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="og-image.png">
-<!-- Превью ссылки в мессенджерах и соцсетях. Если адрес сайта другой — замените URL ниже -->
+<!-- Превью ссылки в мессенджерах. Если адрес сайта другой — замените URL ниже -->
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
-<meta property="og:site_name" content="Демо-Плёнка">
-<meta property="og:title" content="Демо-Плёнка — оклейка авто плёнкой">
-<meta property="og:description" content="Учебный лендинг вымышленной мастерской: полиуретан, смена цвета, тонировка и антихром.">
+<meta property="og:site_name" content="Canopy">
+<meta property="og:title" content="Canopy — маркетинг, который растит прибыль">
+<meta property="og:description" content="Одна команда вместо пяти подрядчиков: стратегия, сайт, реклама и повторные продажи для малого бизнеса.">
 <meta property="og:url" content="https://meytinyt-spec.github.io/demo-site/">
 <meta property="og:image" content="https://meytinyt-spec.github.io/demo-site/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0f1115;
-    --bg-alt: #161a21;
-    --card: #1c212a;
-    --text: #e9ecf1;
-    --muted: #9aa3b2;
-    --accent: #ffcc33;
-    --accent-ink: #1a1400;
-    --tg: #2aabee;
-    --line: #2a303b;
-    --radius: 16px;
-    --wrap: 1120px;
+    --bg: #ffffff;
+    --bg-soft: #f3f6f4;
+    --ink: #0e1a14;
+    --muted: #55615b;
+    --green: #1f7a4c;
+    --green-dark: #17603b;
+    --green-pale: #cfe3d7;
+    --lime: #c6f36b;
+    --line: #e1e8e4;
+    --error: #c2410c;
+    --radius: 20px;
+    --wrap: 1160px;
   }
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
   body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 17px/1.6 Manrope, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
     -webkit-text-size-adjust: 100%;
   }
   a { color: inherit; }
-  h1, h2, h3 { line-height: 1.2; margin: 0 0 .5em; }
-  h2 { font-size: clamp(26px, 4vw, 38px); }
+  h1, h2, h3 { line-height: 1.12; margin: 0 0 .5em; letter-spacing: -.02em; }
+  h2 { font-size: clamp(30px, 4.4vw, 46px); font-weight: 800; }
+  h3 { font-size: 20px; font-weight: 700; letter-spacing: -.01em; }
   p { margin: 0 0 1em; }
   .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 16px; }
-  section { padding: 72px 0; }
-  section:nth-of-type(even) { background: var(--bg-alt); }
-  .lead { color: var(--muted); max-width: 640px; margin-bottom: 32px; }
+  section { padding: 96px 0; }
+  .soft { background: var(--bg-soft); }
+  .eyebrow { display: inline-block; font-size: 14px; font-weight: 700; color: var(--green); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 14px; }
+  .lead { color: var(--muted); font-size: 19px; max-width: 680px; margin-bottom: 48px; }
+  .mark { background: linear-gradient(transparent 60%, var(--lime) 60%); }
 
   /* Кнопки */
-  .btns { display: flex; flex-wrap: wrap; gap: 12px; }
   .btn {
-    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-    min-height: 52px; padding: 0 24px;
-    border-radius: 12px; font-weight: 700; font-size: 16px;
-    text-decoration: none; transition: transform .15s, filter .15s;
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    min-height: 56px; padding: 0 28px; border: 0; border-radius: 12px;
+    background: var(--green); color: #fff; font: 700 17px/1 Manrope, sans-serif;
+    text-decoration: none; cursor: pointer; transition: background .15s, transform .15s;
   }
-  .btn:hover { filter: brightness(1.08); transform: translateY(-1px); }
-  .btn:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
-  .btn-tg { background: var(--tg); color: #fff; }
-  .btn-call { background: var(--accent); color: var(--accent-ink); }
-  .btn svg { width: 20px; height: 20px; flex: none; }
+  .btn:hover { background: var(--green-dark); transform: translateY(-1px); }
+  .btn:focus-visible, .link:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+    outline: 3px solid var(--lime); outline-offset: 2px;
+  }
+  .btn-sm { min-height: 44px; padding: 0 18px; font-size: 15px; border-radius: 10px; }
+  .link { color: var(--green); font-weight: 600; text-decoration: none; padding: 16px 8px; }
+  .link:hover { text-decoration: underline; }
 
   /* Шапка */
-  header {
-    position: sticky; top: 0; z-index: 10;
-    background: rgba(15,17,21,.9); backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--line);
-  }
-  .header-in { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 16px; }
-  .logo { font-weight: 800; font-size: 20px; text-decoration: none; letter-spacing: .2px; }
-  .logo span { color: var(--accent); }
-  nav { display: flex; gap: 24px; }
-  nav a { color: var(--muted); text-decoration: none; font-size: 15px; }
-  nav a:hover { color: var(--text); }
-  .header-call { color: var(--accent); font-weight: 700; text-decoration: none; white-space: nowrap; }
+  header { position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,.92); backdrop-filter: blur(8px); border-bottom: 1px solid transparent; transition: border-color .2s; }
+  header.scrolled { border-bottom-color: var(--line); }
+  .header-in { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 72px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 22px; text-decoration: none; letter-spacing: -.02em; }
+  .brand svg { width: 34px; height: 34px; flex: none; }
+  nav { display: flex; gap: 28px; }
+  nav a { color: var(--muted); text-decoration: none; font-size: 15px; font-weight: 500; }
+  nav a:hover { color: var(--ink); }
 
   /* Первый экран */
-  .hero {
-    padding: 96px 0 88px;
-    background:
-      radial-gradient(800px 400px at 85% 10%, rgba(255,204,51,.16), transparent 60%),
-      radial-gradient(600px 400px at 0% 100%, rgba(42,171,238,.12), transparent 60%),
-      var(--bg);
-  }
-  .tag {
-    display: inline-block; padding: 6px 12px; margin-bottom: 20px;
-    border: 1px solid var(--line); border-radius: 999px;
-    color: var(--muted); font-size: 14px;
-  }
-  .hero h1 { font-size: clamp(34px, 6vw, 60px); max-width: 820px; }
-  .hero h1 em { font-style: normal; color: var(--accent); }
-  .hero p { font-size: clamp(17px, 2vw, 20px); color: var(--muted); max-width: 640px; margin-bottom: 32px; }
-  .hero-facts { display: flex; flex-wrap: wrap; gap: 12px 32px; margin-top: 40px; padding: 0; list-style: none; color: var(--muted); }
-  .hero-facts b { color: var(--text); }
+  .hero { padding: 72px 0 104px; }
+  .hero-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 56px; align-items: center; }
+  .hero h1 { font-size: clamp(38px, 6vw, 64px); font-weight: 800; letter-spacing: -.035em; margin-bottom: 24px; }
+  .hero p { font-size: clamp(18px, 2vw, 20px); color: var(--muted); max-width: 560px; margin-bottom: 32px; }
+  .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
+  .hero-facts { display: flex; flex-wrap: wrap; gap: 10px 28px; list-style: none; padding: 0; margin: 40px 0 0; color: var(--muted); font-size: 15px; }
+  .hero-facts li::before { content: "✓"; color: var(--green); font-weight: 800; margin-right: 8px; }
 
-  /* Сетки карточек */
-  .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
-  .card {
-    background: var(--card); border: 1px solid var(--line);
-    border-radius: var(--radius); padding: 24px;
-    display: flex; flex-direction: column;
-  }
-  .card h3 { font-size: 19px; }
-  .card p { color: var(--muted); font-size: 15px; flex: 1; }
-  .price { font-size: 22px; font-weight: 800; color: var(--accent); margin-top: 8px; }
-  .price small { font-size: 14px; font-weight: 500; color: var(--muted); }
-  .note { color: var(--muted); font-size: 14px; margin-top: 20px; }
+  .report { background: var(--bg-soft); border: 1px solid var(--line); border-radius: 24px; padding: 28px; }
+  .report-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; color: var(--muted); font-size: 15px; }
+  .report-tag { font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: #fff; border: 1px solid var(--line); white-space: nowrap; }
+  .report-num { font-size: 52px; font-weight: 800; color: var(--green); letter-spacing: -.03em; margin: 8px 0 20px; line-height: 1; }
+  .bars { display: flex; align-items: flex-end; gap: 10px; height: 140px; }
+  .bars i { flex: 1; border-radius: 8px 8px 3px 3px; background: var(--green-pale); }
+  .bars i:last-child { background: var(--green); }
+  .bars-x { display: flex; gap: 10px; margin-top: 8px; color: var(--muted); font-size: 13px; }
+  .bars-x span { flex: 1; text-align: center; }
+  .report-rows { margin-top: 20px; border-top: 1px solid var(--line); }
+  .report-rows div { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+  .report-rows div:last-child { border-bottom: 0; padding-bottom: 0; }
+  .report-rows b { font-weight: 700; }
+  .up { color: var(--green); }
+
+  /* Сетки и карточки */
+  .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; }
+  .soft .card { background: #fff; }
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .card p { color: var(--muted); font-size: 16px; margin: 0; }
+  .icon { width: 48px; height: 48px; border-radius: 12px; background: var(--bg-soft); color: var(--green); display: grid; place-items: center; margin-bottom: 18px; }
+  .soft .icon { background: var(--bg-soft); }
+  .icon svg { width: 24px; height: 24px; }
+  .pain h3 { font-size: 19px; }
+  .pain .card { position: relative; padding-left: 64px; }
+  .pain .card::before { content: "!"; position: absolute; left: 24px; top: 28px; width: 26px; height: 26px; border-radius: 50%; background: #fff1e6; color: var(--error); font-weight: 800; display: grid; place-items: center; font-size: 15px; }
+  .pain-out { margin-top: 32px; font-size: 20px; font-weight: 600; }
 
   /* Этапы */
-  .steps { counter-reset: step; list-style: none; padding: 0; margin: 0; display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
-  .steps li {
-    counter-increment: step; position: relative;
-    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
-    padding: 64px 20px 20px;
-  }
-  .steps li::before {
-    content: counter(step);
-    position: absolute; top: 20px; left: 20px;
-    width: 32px; height: 32px; border-radius: 50%;
-    display: grid; place-items: center;
-    background: var(--accent); color: var(--accent-ink); font-weight: 800;
-  }
-  .steps h3 { font-size: 17px; }
+  .steps { list-style: none; padding: 0; margin: 0; display: grid; gap: 16px; grid-template-columns: repeat(5, 1fr); counter-reset: s; }
+  .steps li { counter-increment: s; background: var(--bg-soft); border-radius: var(--radius); padding: 24px; }
+  .steps li::before { content: "0" counter(s); display: block; font-size: 14px; font-weight: 800; color: var(--green); margin-bottom: 40px; }
+  .steps h3 { font-size: 18px; }
   .steps p { color: var(--muted); font-size: 15px; margin: 0; }
+  .steps .when { display: block; margin-top: 12px; font-size: 13px; font-weight: 700; color: var(--ink); }
 
-  /* Гарантия */
-  .warranty { display: grid; gap: 32px; grid-template-columns: 1fr 1fr; align-items: start; }
-  .badge {
-    background: linear-gradient(135deg, var(--accent), #ff9f1a);
-    color: var(--accent-ink); border-radius: var(--radius); padding: 32px;
-  }
-  .badge .big { font-size: clamp(48px, 8vw, 72px); font-weight: 900; line-height: 1; }
-  .badge p { margin: 12px 0 0; font-weight: 600; }
-  .checks { list-style: none; padding: 0; margin: 0; }
-  .checks li { padding: 12px 0 12px 32px; border-bottom: 1px solid var(--line); position: relative; }
-  .checks li:last-child { border-bottom: 0; }
-  .checks li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: 800; }
-  .checks .muted { color: var(--muted); font-size: 15px; }
+  /* Принципы */
+  .principles { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+  .principles .lead { margin-bottom: 0; }
+  .plist { list-style: none; padding: 0; margin: 0; }
+  .plist li { padding: 22px 0; border-bottom: 1px solid var(--line); }
+  .plist li:first-child { padding-top: 0; }
+  .plist li:last-child { border-bottom: 0; }
+  .plist b { display: block; font-size: 19px; margin-bottom: 4px; }
+  .plist span { color: var(--muted); font-size: 16px; }
+
+  /* Бесплатный разбор */
+  .audit { background: var(--ink); color: #fff; border-radius: 28px; padding: 56px; display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: center; }
+  .audit h2 { color: #fff; }
+  .audit .mark { background: none; color: var(--lime); }
+  .audit p { color: #a9b8b0; font-size: 18px; }
+  .audit ul { list-style: none; padding: 0; margin: 0; }
+  .audit li { padding: 14px 0 14px 36px; position: relative; border-bottom: 1px solid #23342b; }
+  .audit li:last-child { border-bottom: 0; }
+  .audit li::before { content: ""; position: absolute; left: 0; top: 18px; width: 20px; height: 20px; border-radius: 6px; background: var(--lime); }
+  .audit li::after { content: ""; position: absolute; left: 6px; top: 22px; width: 7px; height: 4px; border-left: 2.5px solid var(--ink); border-bottom: 2.5px solid var(--ink); transform: rotate(-45deg); }
+  .audit .btn { background: var(--lime); color: var(--ink); margin-top: 8px; }
+  .audit .btn:hover { background: #b5e85a; }
+  .audit-meta { margin-top: 16px; font-size: 14px; color: #a9b8b0; }
 
   /* FAQ */
-  .faq { max-width: 820px; }
-  details {
-    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
-    margin-bottom: 12px; padding: 0 20px;
-  }
-  summary {
-    cursor: pointer; list-style: none; padding: 18px 32px 18px 0; position: relative;
-    font-weight: 600;
-  }
+  .faq { max-width: 840px; }
+  details { border-bottom: 1px solid var(--line); }
+  summary { cursor: pointer; list-style: none; padding: 22px 40px 22px 0; position: relative; font-weight: 700; font-size: 18px; }
   summary::-webkit-details-marker { display: none; }
-  summary::after {
-    content: "+"; position: absolute; right: 0; top: 50%; transform: translateY(-50%);
-    font-size: 24px; color: var(--accent); transition: transform .2s;
-  }
+  summary::after { content: "+"; position: absolute; right: 4px; top: 50%; transform: translateY(-50%); font-size: 28px; font-weight: 500; color: var(--green); transition: transform .2s; }
   details[open] summary::after { transform: translateY(-50%) rotate(45deg); }
-  details p { color: var(--muted); padding-bottom: 18px; margin: 0; }
+  details p { color: var(--muted); margin: 0; padding-bottom: 22px; max-width: 720px; }
 
-  /* Контакты */
-  .cta { text-align: center; }
-  .cta .lead { margin-left: auto; margin-right: auto; }
-  .cta .btns { justify-content: center; }
-  .contacts { color: var(--muted); margin-top: 24px; font-size: 15px; }
+  /* Форма */
+  .form-wrap { display: grid; grid-template-columns: 1fr 1.1fr; gap: 56px; align-items: start; }
+  .contact-alt { margin-top: 24px; color: var(--muted); font-size: 16px; }
+  form { background: #fff; border: 1px solid var(--line); border-radius: 24px; padding: 32px; }
+  .field { margin-bottom: 18px; }
+  .field label { display: block; font-weight: 600; font-size: 15px; margin-bottom: 6px; }
+  .field .opt { color: var(--muted); font-weight: 500; }
+  input[type=text], input[type=tel], select, textarea {
+    width: 100%; min-height: 52px; padding: 12px 16px; border: 1.5px solid var(--line); border-radius: 12px;
+    font: 500 16px/1.4 Manrope, sans-serif; color: var(--ink); background: #fff; transition: border-color .15s;
+  }
+  textarea { min-height: 96px; resize: vertical; }
+  select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2355615b' stroke-width='2' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; }
+  input:hover, select:hover, textarea:hover { border-color: #c4d1ca; }
+  .invalid input, .invalid select { border-color: var(--error); }
+  .err { display: none; color: var(--error); font-size: 14px; margin-top: 6px; }
+  .invalid .err { display: block; }
+  .consent { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; color: var(--muted); margin: 6px 0 22px; }
+  .consent input { width: 20px; height: 20px; margin: 1px 0 0; accent-color: var(--green); flex: none; }
+  .consent.invalid { color: var(--error); }
+  form .btn { width: 100%; }
+  .demo-note { margin: 14px 0 0; font-size: 13px; color: var(--muted); text-align: center; }
+  .success { display: none; text-align: center; padding: 24px 8px; }
+  .success .ok { width: 64px; height: 64px; border-radius: 50%; background: var(--lime); display: grid; place-items: center; margin: 0 auto 20px; }
+  .success .ok svg { width: 30px; height: 30px; }
+  .success p { color: var(--muted); }
+  form.sent .fields { display: none; }
+  form.sent .success { display: block; }
 
-  footer { border-top: 1px solid var(--line); padding: 32px 0 40px; color: var(--muted); font-size: 14px; }
-  footer p { margin: 0 0 8px; }
-  .disclaimer { color: var(--text); background: var(--card); border: 1px dashed var(--line); border-radius: 12px; padding: 12px 16px; margin-bottom: 16px; }
+  footer { border-top: 1px solid var(--line); padding: 40px 0 48px; color: var(--muted); font-size: 14px; }
+  .footer-in { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 32px; align-items: center; }
+  footer .brand { font-size: 18px; color: var(--ink); }
+  footer .brand svg { width: 28px; height: 28px; }
+  footer a { color: var(--muted); }
+  .disclaimer { background: var(--bg-soft); border: 1px dashed #c4d1ca; border-radius: 12px; padding: 12px 16px; margin-bottom: 24px; color: var(--ink); }
 
-  /* Плавающие кнопки на телефоне */
-  .mobile-bar { display: none; }
+  .mobile-cta { display: none; }
 
-  @media (max-width: 860px) {
+  @media (max-width: 1000px) {
+    .steps { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+    .steps li::before { margin-bottom: 20px; }
+  }
+  @media (max-width: 900px) {
     nav { display: none; }
-    .warranty { grid-template-columns: 1fr; }
+    .hero-grid, .principles, .audit, .form-wrap { grid-template-columns: 1fr; }
+    .grid-3 { grid-template-columns: repeat(2, 1fr); }
+    .hero-grid, .principles, .form-wrap { gap: 40px; }
+    .audit { padding: 40px 28px; gap: 28px; }
   }
   @media (max-width: 600px) {
-    section { padding: 56px 0; }
-    .hero { padding: 56px 0 48px; }
-    .header-call { display: none; }
-    .btns .btn { flex: 1 1 100%; }
-    .mobile-bar {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
-      position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
-      padding: 8px 16px calc(8px + env(safe-area-inset-bottom));
-      background: rgba(15,17,21,.95); border-top: 1px solid var(--line);
+    section { padding: 64px 0; }
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .hero { padding: 40px 0 64px; }
+    .header-in { height: 64px; }
+    .header-in .btn { display: none; }
+    .hero-actions .btn { width: 100%; }
+    .report { padding: 22px; }
+    .report-num { font-size: 44px; }
+    .lead { margin-bottom: 32px; }
+    form { padding: 24px 18px; }
+    .audit { padding: 32px 20px; border-radius: 22px; }
+    .pain .card { padding: 22px 22px 22px 58px; }
+    .pain .card::before { left: 20px; top: 22px; }
+    .mobile-cta {
+      display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
+      padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+      background: rgba(255,255,255,.96); border-top: 1px solid var(--line);
+      transform: translateY(110%); transition: transform .25s;
     }
-    .mobile-bar .btn { min-height: 48px; padding: 0 12px; font-size: 15px; }
-    body { padding-bottom: 72px; }
+    .mobile-cta.show { transform: none; }
+    .mobile-cta .btn { width: 100%; min-height: 50px; }
+    body { padding-bottom: 76px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; }
   }
 </style>
 </head>
 <body>
 
-<!-- Контакты вымышленные: замените ссылку Telegram и номер телефона на свои -->
-<header>
+<!-- Логотип: три растущих столбика, на верхнем — лист -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="logo" viewBox="0 0 40 40">
+    <rect x="4" y="24" width="8" height="12" rx="2.5" fill="#cfe3d7"/>
+    <rect x="16" y="17" width="8" height="19" rx="2.5" fill="#cfe3d7"/>
+    <rect x="28" y="12" width="8" height="24" rx="2.5" fill="#1f7a4c"/>
+    <path d="M32 11C32 5 36 2 40 2c0 5-3 9-8 9z" fill="#1f7a4c"/>
+  </symbol>
+</svg>
+
+<header id="header">
   <div class="wrap header-in">
-    <a class="logo" href="#top">Демо-<span>Плёнка</span></a>
+    <a class="brand" href="#top" aria-label="Canopy — на главную"><svg aria-hidden="true"><use href="#logo"/></svg>Canopy</a>
     <nav aria-label="Разделы">
       <a href="#services">Услуги</a>
-      <a href="#steps">Этапы</a>
-      <a href="#warranty">Гарантия</a>
+      <a href="#steps">Как работаем</a>
+      <a href="#audit">Бесплатный разбор</a>
       <a href="#faq">Вопросы</a>
     </nav>
-    <a class="header-call" href="tel:+70000000000">+7 000 000-00-00</a>
+    <a class="btn btn-sm" href="#lead">Оставить заявку</a>
   </div>
 </header>
 
 <main id="top">
+  <!-- Первый экран -->
   <section class="hero">
-    <div class="wrap">
-      <span class="tag">Мастерская по оклейке автомобилей</span>
-      <h1>Защитим кузов плёнкой <em>без снятия деталей</em> и лишних слов</h1>
-      <p>Полиуретан от сколов, смена цвета винилом, тонировка и антихром. Покажем образцы плёнок, честно посчитаем стоимость и отдадим машину в оговорённый срок.</p>
-      <div class="btns">
-        <a class="btn btn-tg" href="https://t.me/" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.8 15.3 9.4 20c.6 0 .9-.3 1.2-.6l2.9-2.8 6 4.4c1.1.6 1.9.3 2.2-1L24 3.6c.4-1.6-.6-2.2-1.6-1.8L1.2 9.9c-1.5.6-1.4 1.4-.3 1.8l5.4 1.7L18.8 5.5c.6-.4 1.1-.2.7.2z"/></svg>
-          Написать в Telegram
-        </a>
-        <a class="btn btn-call" href="tel:+70000000000">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg>
-          Позвонить
-        </a>
+    <div class="wrap hero-grid">
+      <div>
+        <h1>Маркетинг, который растит <span class="mark">прибыль</span>, а не лайки</h1>
+        <p>Одна команда вместо пяти подрядчиков: стратегия, сайт, реклама и повторные продажи для малого бизнеса. Отчитываемся заявками и деньгами.</p>
+        <div class="hero-actions">
+          <a class="btn" href="#lead">Получить бесплатный разбор</a>
+          <a class="link" href="#steps">Как мы работаем →</a>
+        </div>
+        <ul class="hero-facts">
+          <li>Разбор за 30 минут</li>
+          <li>Отчёт каждую неделю</li>
+          <li>Договор помесячно</li>
+        </ul>
       </div>
-      <ul class="hero-facts">
-        <li><b>от 1 дня</b> — срок работ</li>
-        <li><b>до 3 лет</b> — гарантия на монтаж</li>
-        <li><b>Смета</b> — до начала работ</li>
-      </ul>
+      <div class="report" aria-label="Пример еженедельного отчёта для клиента">
+        <div class="report-head"><span>Заявки клиента по месяцам</span><span class="report-tag">Пример отчёта</span></div>
+        <div class="report-num">+38%</div>
+        <div class="bars" aria-hidden="true"><i style="height:35%"></i><i style="height:48%"></i><i style="height:60%"></i><i style="height:74%"></i><i style="height:100%"></i></div>
+        <div class="bars-x" aria-hidden="true"><span>Янв</span><span>Фев</span><span>Мар</span><span>Апр</span><span>Май</span></div>
+        <div class="report-rows">
+          <div><span>Стоимость заявки</span><b class="up">−24%</b></div>
+          <div><span>Повторные покупки</span><b class="up">+17%</b></div>
+        </div>
+      </div>
     </div>
   </section>
 
+  <!-- Боли -->
+  <section class="soft pain" id="pain">
+    <div class="wrap">
+      <span class="eyebrow">Узнаёте себя?</span>
+      <h2>Деньги на маркетинг уходят,<br>а прибыль не растёт</h2>
+      <p class="lead">С этим к нам чаще всего приходят владельцы малого бизнеса.</p>
+      <div class="grid grid-2">
+        <div class="card"><h3>Реклама есть — заявок мало</h3><p>Бюджет тратится каждый месяц, а телефон молчит или звонят «не те» клиенты.</p></div>
+        <div class="card"><h3>Непонятно, что работает</h3><p>Сайт, соцсети, реклама, Авито — где именно появляются клиенты, никто не считает.</p></div>
+        <div class="card"><h3>Пять подрядчиков — ноль ответственности</h3><p>Сайтом занимается один, рекламой другой, соцсетями третий. Виноватых нет, результата тоже.</p></div>
+        <div class="card"><h3>Клиенты приходят один раз</h3><p>Каждого покупателя привлекаете заново, хотя повторная продажа стоит в разы дешевле.</p></div>
+      </div>
+      <p class="pain-out">Мы собираем всё это в одну систему и отвечаем за неё целиком.</p>
+    </div>
+  </section>
+
+  <!-- Услуги -->
   <section id="services">
     <div class="wrap">
-      <h2>Услуги и цены</h2>
-      <p class="lead">Указаны стартовые цены для легкового автомобиля среднего класса. Точная стоимость зависит от размера машины, состояния кузова и выбранной плёнки.</p>
-      <div class="grid">
-        <article class="card">
-          <h3>Антигравийная плёнка — зоны риска</h3>
-          <p>Капот, передний бампер, фары, зеркала и передние крылья. Защищает от сколов и песка.</p>
-          <div class="price"><small>от</small> 25 000 ₽</div>
-        </article>
-        <article class="card">
-          <h3>Полная оклейка полиуретаном</h3>
-          <p>Весь кузов в глянцевую или матовую прозрачную плёнку. Сохраняет заводское ЛКП.</p>
-          <div class="price"><small>от</small> 140 000 ₽</div>
-        </article>
-        <article class="card">
-          <h3>Смена цвета винилом</h3>
-          <p>Полная или частичная оклейка цветной плёнкой: глянец, мат, сатин, металлик.</p>
-          <div class="price"><small>от</small> 90 000 ₽</div>
-        </article>
-        <article class="card">
-          <h3>Антихром</h3>
-          <p>Оклейка хромированных молдингов, решётки и эмблем чёрной или цветной плёнкой.</p>
-          <div class="price"><small>от</small> 6 000 ₽</div>
-        </article>
-        <article class="card">
-          <h3>Тонировка стёкол</h3>
-          <p>Задняя полусфера и боковые стёкла. Подберём плёнку с учётом требований к светопропусканию.</p>
-          <div class="price"><small>от</small> 5 000 ₽</div>
-        </article>
-        <article class="card">
-          <h3>Бронирование салона</h3>
-          <p>Глянцевые панели, мультимедиа, пороги и зоны, которые быстро царапаются.</p>
-          <div class="price"><small>от</small> 4 000 ₽</div>
-        </article>
+      <span class="eyebrow">Что делаем</span>
+      <h2>Все каналы роста под одной кроной</h2>
+      <p class="lead">Не продаём услуги по отдельности: подбираем только те, которые окупятся в вашем бизнесе.</p>
+      <div class="grid grid-3">
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 6-6"/></svg></div>
+          <h3>Аудит и стратегия</h3>
+          <p>Разбираем цифры, конкурентов и путь клиента. Считаем, сколько стоит заявка в каждом канале, и решаем, куда вкладывать.</p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M7 14h6"/></svg></div>
+          <h3>Сайты и лендинги</h3>
+          <p>Делаем страницы, которые превращают посетителей в заявки: понятное предложение, быстрые формы, удобство на телефоне.</p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></div>
+          <h3>Контекстная реклама</h3>
+          <p>Яндекс Директ под реальный спрос: показываемся тем, кто уже ищет ваш товар или услугу.</p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></div>
+          <h3>Таргетированная реклама</h3>
+          <p>VK Реклама и Telegram Ads: находим аудиторию по интересам и району, тестируем объявления малыми бюджетами.</p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <h3>Соцсети и контент</h3>
+          <p>Ведём сообщества и каналы так, чтобы они продавали: контент-план, тексты, визуал и работа с отзывами.</p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg></div>
+          <h3>Повторные продажи</h3>
+          <p>CRM, рассылки, программы лояльности и напоминания — чтобы клиенты возвращались без новых затрат на рекламу.</p>
+        </div>
       </div>
-      <p class="note">Цены условные — сайт учебный.</p>
     </div>
   </section>
 
-  <section id="steps">
+  <!-- Этапы -->
+  <section class="soft" id="steps">
     <div class="wrap">
-      <h2>Как проходит работа</h2>
-      <p class="lead">Пять шагов от первого сообщения до выдачи автомобиля.</p>
+      <span class="eyebrow">Как работаем</span>
+      <h2>От разбора до роста — пять шагов</h2>
+      <p class="lead">Первые результаты видны уже в первый месяц, дальше — масштабируем то, что работает.</p>
       <ol class="steps">
-        <li>
-          <h3>Связь и предварительный расчёт</h3>
-          <p>Пишете в Telegram или звоните — называем ориентировочную цену и свободные даты.</p>
-        </li>
-        <li>
-          <h3>Осмотр и смета</h3>
-          <p>Смотрим кузов, показываем образцы плёнок, фиксируем стоимость и срок.</p>
-        </li>
-        <li>
-          <h3>Подготовка</h3>
-          <p>Мойка, обезжиривание, удаление битума и мелкой грязи из стыков.</p>
-        </li>
-        <li>
-          <h3>Оклейка</h3>
-          <p>Монтаж в чистом тёплом боксе, кромки заворачиваем там, где это возможно.</p>
-        </li>
-        <li>
-          <h3>Выдача</h3>
-          <p>Проверяем результат вместе с вами, рассказываем про уход и выдаём гарантийный талон.</p>
-        </li>
+        <li><h3>Бесплатный разбор</h3><p>Созваниваемся, смотрим ваши цифры и находим главные точки потерь.</p><span class="when">30 минут</span></li>
+        <li><h3>Стратегия</h3><p>Предлагаем план: каналы, бюджет, прогноз заявок и стоимость работ.</p><span class="when">3–5 дней</span></li>
+        <li><h3>Запуск</h3><p>Настраиваем аналитику, рекламу, сайт — всё, что вошло в план.</p><span class="when">1–2 недели</span></li>
+        <li><h3>Отчёты</h3><p>Каждую неделю — простой отчёт: сколько потратили, сколько заявок и продаж.</p><span class="when">еженедельно</span></li>
+        <li><h3>Рост</h3><p>Отключаем то, что не окупается, и вкладываем больше в то, что приносит деньги.</p><span class="when">каждый месяц</span></li>
       </ol>
     </div>
   </section>
 
-  <section id="warranty">
-    <div class="wrap warranty">
+  <!-- Принципы -->
+  <section id="why">
+    <div class="wrap principles">
       <div>
-        <h2>Гарантия</h2>
-        <p class="lead">Отвечаем за свою работу и прописываем условия в гарантийном талоне.</p>
-        <div class="badge">
-          <div class="big">до 3 лет</div>
-          <p>на монтаж — срок зависит от вида плёнки и услуги</p>
-        </div>
+        <span class="eyebrow">Почему Canopy</span>
+        <h2>Работаем так, как хотели бы, чтобы работали с нами</h2>
+        <p class="lead">Малый бизнес не может позволить себе маркетинг «ради галочки». Поэтому у нас четыре правила.</p>
       </div>
-      <ul class="checks">
-        <li><b>Отслоения и пузыри по нашей вине</b><br><span class="muted">Переклеим элемент бесплатно.</span></li>
-        <li><b>Гарантия производителя на плёнку</b><br><span class="muted">Действует отдельно, срок указан в документах на материал.</span></li>
-        <li><b>Бесплатный осмотр</b><br><span class="muted">Через месяц после оклейки проверим кромки и стыки.</span></li>
-        <li><b>Что не входит</b><br><span class="muted">Механические повреждения, ДТП и мойка с нарушением рекомендаций по уходу.</span></li>
+      <ul class="plist">
+        <li><b>Считаем деньги, а не охваты</b><span>Главные цифры в отчёте — стоимость заявки, продажи и окупаемость вложений.</span></li>
+        <li><b>Одна команда и один ответственный</b><span>Вы общаетесь с одним менеджером, а он отвечает за весь результат.</span></li>
+        <li><b>Прозрачный бюджет</b><span>Рекламные кабинеты оформлены на вас. Вы видите каждый потраченный рубль.</span></li>
+        <li><b>Без долгих обязательств</b><span>Договор помесячно. Остаётесь, потому что выгодно, а не из-за штрафов.</span></li>
       </ul>
     </div>
   </section>
 
-  <section id="faq">
+  <!-- Бесплатный разбор -->
+  <section id="audit" style="padding-top:0">
+    <div class="wrap">
+      <div class="audit">
+        <div>
+          <h2>Бесплатный разбор <span class="mark">вашего маркетинга</span></h2>
+          <p>30 минут онлайн. Без продаж «в лоб» — даже если не начнём работать вместе, вы уйдёте с понятным списком действий.</p>
+          <a class="btn" href="#lead">Записаться на разбор</a>
+          <div class="audit-meta">Стоимость работ называем после разбора — когда понятны задачи и объём.</div>
+        </div>
+        <ul>
+          <li>Где теряются клиенты: от рекламы до оплаты</li>
+          <li>Какие каналы окупаются, а какие — нет</li>
+          <li>Сколько заявок реально получить при вашем бюджете</li>
+          <li>Три первых шага, которые можно сделать уже на этой неделе</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="soft" id="faq">
     <div class="wrap faq">
-      <h2>Вопросы и ответы</h2>
+      <span class="eyebrow">Вопросы</span>
+      <h2>Частые вопросы</h2>
       <details>
-        <summary>Сколько времени занимает оклейка?</summary>
-        <p>Зоны риска — 1–2 дня, полная оклейка полиуретаном или смена цвета — 4–7 дней. Точный срок называем после осмотра.</p>
+        <summary>Сколько стоят ваши услуги?</summary>
+        <p>Стоимость зависит от задач, количества каналов и вашей ниши, поэтому называем её после бесплатного разбора. Вы получите точную смету и прогноз до начала работ — без скрытых платежей.</p>
       </details>
       <details>
-        <summary>Нужно ли снимать детали?</summary>
-        <p>В большинстве случаев нет. Иногда снимаем эмблемы или фонари, чтобы аккуратно завернуть кромку — обсуждаем это заранее.</p>
+        <summary>Какой нужен рекламный бюджет?</summary>
+        <p>Это тоже обсуждаем на разборе. Начинаем с теста на небольшом бюджете, смотрим на стоимость заявки и увеличиваем вложения только в то, что окупается.</p>
       </details>
       <details>
-        <summary>Повредит ли плёнка заводскую краску при снятии?</summary>
-        <p>Качественная плёнка на родном лакокрасочном покрытии снимается без следов. На перекрашенных деталях есть риск, о нём предупредим при осмотре.</p>
+        <summary>С какими бизнесами вы работаете?</summary>
+        <p>С малым бизнесом в сфере услуг, торговли и производства: салоны, клиники, автосервисы, кафе, ремонт, обучение, интернет-магазины и другие ниши, где клиенты приходят по заявкам и звонкам.</p>
       </details>
       <details>
-        <summary>Как ухаживать за машиной после оклейки?</summary>
-        <p>Первую неделю не мыть. Дальше — бесконтактная или ручная мойка, без направленной струи высокого давления на кромки.</p>
+        <summary>Когда будут первые результаты?</summary>
+        <p>Первые заявки с рекламы обычно приходят в течение 1–2 недель после запуска. Устойчивый рост прибыли — это 2–3 месяца работы и регулярной оптимизации.</p>
       </details>
       <details>
-        <summary>Можно ли оклеить только часть кузова?</summary>
-        <p>Да: капот, крышу, зеркала или любые отдельные элементы. Цену считаем поэлементно.</p>
+        <summary>У меня уже есть сайт и подрядчик по рекламе. Вы нужны?</summary>
+        <p>Можем начать с аудита: проверим, что работает, а что нет, и дадим рекомендации. Дальше решите сами — доработать текущую схему или передать всё нам.</p>
       </details>
       <details>
-        <summary>Нужно ли согласовывать смену цвета?</summary>
-        <p>Правила зависят от законодательства и того, меняется ли основной цвет автомобиля. Перед работой рекомендуем уточнить требования в ГИБДД.</p>
+        <summary>Вы гарантируете результат?</summary>
+        <p>Честно: гарантировать конкретное число продаж не может никто — это зависит и от продукта, и от того, как вы обрабатываете заявки. Мы гарантируем прозрачность: каждую неделю вы видите, куда ушли деньги и что они принесли.</p>
       </details>
     </div>
   </section>
 
-  <section id="contacts" class="cta">
-    <div class="wrap">
-      <h2>Посчитаем стоимость за пару минут</h2>
-      <p class="lead">Напишите марку и модель автомобиля и что хотите защитить или переклеить — ответим с ориентировочной ценой.</p>
-      <div class="btns">
-        <a class="btn btn-tg" href="https://t.me/" target="_blank" rel="noopener">Написать в Telegram</a>
-        <a class="btn btn-call" href="tel:+70000000000">Позвонить</a>
+  <!-- Форма заявки -->
+  <section id="lead">
+    <div class="wrap form-wrap">
+      <div>
+        <span class="eyebrow">Заявка</span>
+        <h2>Запишитесь на бесплатный разбор</h2>
+        <p class="lead" style="margin-bottom:0">Оставьте контакты — свяжемся в течение рабочего дня, уточним пару вопросов о бизнесе и договоримся о времени созвона.</p>
+        <p class="contact-alt">Ответим в Telegram или по телефону — как вам удобнее.</p>
       </div>
-      <p class="contacts">Ежедневно с 10:00 до 20:00 · +7 000 000-00-00</p>
+
+      <form id="lead-form" novalidate>
+        <div class="fields">
+          <div class="field" data-field="name">
+            <label for="f-name">Как к вам обращаться</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" placeholder="Имя" required>
+            <div class="err">Напишите, как к вам обращаться</div>
+          </div>
+          <div class="field" data-field="contact">
+            <label for="f-contact">Телефон или ник в Telegram</label>
+            <input id="f-contact" name="contact" type="text" autocomplete="tel" placeholder="+7 900 000-00-00 или @username" required>
+            <div class="err">Укажите телефон или ник в Telegram</div>
+          </div>
+          <div class="field" data-field="business">
+            <label for="f-business">Сфера бизнеса</label>
+            <select id="f-business" name="business" required>
+              <option value="">Выберите вариант</option>
+              <option>Услуги (салон, клиника, сервис)</option>
+              <option>Ремонт и строительство</option>
+              <option>Кафе, ресторан, доставка еды</option>
+              <option>Розничная торговля</option>
+              <option>Интернет-магазин</option>
+              <option>Обучение и курсы</option>
+              <option>Производство</option>
+              <option>Другое</option>
+            </select>
+            <div class="err">Выберите сферу бизнеса</div>
+          </div>
+          <div class="field">
+            <label for="f-site">Сайт или соцсети <span class="opt">— если есть</span></label>
+            <input id="f-site" name="site" type="text" placeholder="Ссылка">
+          </div>
+          <div class="field">
+            <label for="f-msg">Что хотите улучшить <span class="opt">— необязательно</span></label>
+            <textarea id="f-msg" name="message" placeholder="Например: мало заявок с рекламы"></textarea>
+          </div>
+          <label class="consent" data-field="consent">
+            <input type="checkbox" name="consent" required>
+            <span>Согласен(на) на обработку персональных данных в соответствии с <a href="privacy.html" target="_blank">политикой конфиденциальности</a></span>
+          </label>
+          <button class="btn" type="submit">Записаться на разбор</button>
+          <p class="demo-note">Демо-режим: заявка никуда не отправляется.</p>
+        </div>
+        <div class="success" role="status" aria-live="polite">
+          <div class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="#0e1a14" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></div>
+          <h3>Спасибо, заявка принята!</h3>
+          <p>Свяжемся с вами в течение рабочего дня.</p>
+          <p class="demo-note">Это демо-форма — данные никуда не отправлены.</p>
+        </div>
+      </form>
     </div>
   </section>
 </main>
 
 <footer>
   <div class="wrap">
-    <p class="disclaimer">Это учебный сайт. Бренд «Демо-Плёнка» вымышленный, мастерской не существует. Цены, телефон и контакты условные.</p>
-    <p>© 2026 «Демо-Плёнка» — демонстрационный проект</p>
+    <p class="disclaimer">Демо-версия сайта. Агентство Canopy пока в разработке, цифры в примере отчёта условные.</p>
+    <div class="footer-in">
+      <a class="brand" href="#top"><svg aria-hidden="true"><use href="#logo"/></svg>Canopy</a>
+      <span>Маркетинговое агентство для малого бизнеса</span>
+      <a href="privacy.html">Политика конфиденциальности</a>
+      <span>© 2026 Canopy</span>
+    </div>
   </div>
 </footer>
 
-<div class="mobile-bar">
-  <a class="btn btn-tg" href="https://t.me/" target="_blank" rel="noopener">Telegram</a>
-  <a class="btn btn-call" href="tel:+70000000000">Позвонить</a>
+<div class="mobile-cta" id="mobile-cta">
+  <a class="btn" href="#lead">Получить бесплатный разбор</a>
 </div>
 
+<script>
+  // Граница у шапки при прокрутке и плавающая кнопка на телефоне
+  (function () {
+    var header = document.getElementById('header');
+    var cta = document.getElementById('mobile-cta');
+    var hero = document.querySelector('.hero');
+    var lead = document.getElementById('lead');
+    function onScroll() {
+      var y = window.scrollY;
+      header.classList.toggle('scrolled', y > 8);
+      var pastHero = y > hero.offsetTop + hero.offsetHeight - 80;
+      var atForm = lead.getBoundingClientRect().top < window.innerHeight * 0.6;
+      cta.classList.toggle('show', pastHero && !atForm);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+
+  // Форма заявки
+  (function () {
+    var form = document.getElementById('lead-form');
+
+    // Сейчас — демо: ничего не отправляем. Позже здесь будет отправка в Telegram.
+    function sendLead(data) {
+      return new Promise(function (resolve) { setTimeout(resolve, 600); });
+    }
+
+    function check(name, ok) {
+      var el = form.querySelector('[data-field="' + name + '"]');
+      el.classList.toggle('invalid', !ok);
+      return ok;
+    }
+    function validate() {
+      var f = form.elements;
+      var contact = f.contact.value.trim();
+      var digits = contact.replace(/\D/g, '');
+      var okContact = /^@?[A-Za-z0-9_]{5,32}$/.test(contact) && /[A-Za-z]/.test(contact) || digits.length >= 10;
+      var results = [
+        check('name', f.name.value.trim().length >= 2),
+        check('contact', okContact),
+        check('business', f.business.value !== ''),
+        check('consent', f.consent.checked)
+      ];
+      return results.every(Boolean);
+    }
+
+    form.addEventListener('input', function (e) {
+      var wrap = e.target.closest('[data-field]');
+      if (wrap && wrap.classList.contains('invalid')) validate();
+    });
+    form.addEventListener('change', function (e) {
+      var wrap = e.target.closest('[data-field]');
+      if (wrap && wrap.classList.contains('invalid')) validate();
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!validate()) {
+        var first = form.querySelector('.invalid input, .invalid select');
+        if (first) first.focus();
+        return;
+      }
+      var btn = form.querySelector('button[type=submit]');
+      btn.disabled = true;
+      btn.textContent = 'Отправляем…';
+      var data = Object.fromEntries(new FormData(form));
+      sendLead(data).then(function () {
+        form.classList.add('sent');
+        form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    });
+  })();
+</script>
 </body>
 </html>
